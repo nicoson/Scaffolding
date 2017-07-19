@@ -91,6 +91,9 @@ gulp.task('js', function() {
 	// Minify and copy all JavaScript (except vendor scripts) 
 	// with sourcemaps all the way down
 	if(argv.env == ENV_Production) {
+		gulp.src(paths.venderJS)
+		.pipe(gulp.dest(paths.venderJSDest));
+
 		return gulp.src(paths.appjs)
 		// .pipe(sourcemaps.init())
 		.pipe(uglify())
@@ -99,6 +102,9 @@ gulp.task('js', function() {
 		.pipe(gulp.dest(paths.appjsDest))
 		.pipe(browserSync.reload({stream:true}));
 	}else{
+		gulp.src(paths.venderJS)
+		.pipe(gulp.dest(paths.venderJSDest));
+		
 		return gulp.src(paths.appjs)
 		.pipe(gulp.dest(paths.appjsDest))
 		.pipe(browserSync.reload({stream:true}));
