@@ -103,9 +103,6 @@ gulp.task('js', function() {
 		.pipe(gulp.dest(paths.appjsDest))
 		.pipe(browserSync.reload({stream:true}));
 	}else{
-		gulp.src(paths.venderJS)
-		.pipe(gulp.dest(paths.venderJSDest));
-		
 		return gulp.src(paths.appjs)
 		.pipe(babel({presets: ['es2015']}))
 		.pipe(gulp.dest(paths.appjsDest))
