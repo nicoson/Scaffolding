@@ -41,6 +41,8 @@ if(argv.env == ENV_Production){
 
 // setting the path
 var paths = {
+	indexhtml: 'src/views/index.html',
+	indexhtmlDest: destDir,
 	less: 'src/less/*.less',
 	lessDest: destDir + '/stylesheet',
 	appjs: 'src/js/*.js',
@@ -118,7 +120,9 @@ gulp.task("copy", function(){
 	// 	.pipe(gulp.dest(paths.appjsonDest));
 	// }
 
-	return gulp.src(paths.venderJS)
+	return gulp.src(paths.indexhtml)
+	.pipe(gulp.dest(paths.indexhtmlDest)),
+	gulp.src(paths.venderJS)
 	.pipe(gulp.dest(paths.venderJSDest)),
 	gulp.src(paths.appjson)
 	.pipe(gulp.dest(paths.appjsonDest)),
@@ -203,6 +207,11 @@ gulp.task('browserSync', ['less', 'js'], function() {
     gulp.watch(paths.appviews, function(){
 		return gulp.src(paths.appviews)
 		.pipe(gulp.dest(paths.appviewsDest))
+		.pipe(browserSync.reload({stream:true}));
+	});
+    gulp.watch(paths.indexhtml, function(){
+		return gulp.src(paths.indexhtml)
+		.pipe(gulp.dest(paths.indexhtmlDest))
 		.pipe(browserSync.reload({stream:true}));
 	});
 });
